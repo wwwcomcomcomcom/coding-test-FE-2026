@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { Skeleton, Table } from '@radix-ui/themes';
 import type { SlideSummary } from '../api/types';
 import { formatKST, maskName } from '../utils/format';
@@ -5,15 +6,23 @@ import { StatusBadge } from './StatusBadge';
 
 interface Props {
   items: SlideSummary[] | null;
-  selectedId: string | null;
+  /** SlideCursor가 가리키는 슬라이드. 파란 배경으로 표시한다 */
+  cursorId: string | null;
   onSelect: (id: string) => void;
 }
 
 const SKELETON_ROWS = 8;
 
-export function SlideTable({ items, selectedId, onSelect }: Props) {
+export function SlideTable({ items, cursorId, onSelect }: Props) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  // 키보드로 커서를 옮기면 화면 밖에 있을 수 있으므로 보이는 곳까지 스크롤한다 (이미 보이면 그대로)
+  useEffect(() => {
+    ref.current?.querySelector('[data-cursor]')?.scrollIntoView({ block: 'nearest' });
+  }, [cursorId]);
+
   return (
-    <Table.Root variant="surface">
+    <Table.Root ref={ref} variant="surface">
       <Table.Header>
         <Table.Row>
           <Table.ColumnHeaderCell width="72px">썸네일</Table.ColumnHeaderCell>
@@ -40,7 +49,7 @@ export function SlideTable({ items, selectedId, onSelect }: Props) {
                 key={slide.id}
                 align="center"
                 className="slide-row"
-                data-selected={slide.id === selectedId || undefined}
+                data-cursor={slide.id === cursorId || undefined}
                 onClick={() => onSelect(slide.id)}
               >
                 <Table.Cell>

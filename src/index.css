@@ -7,7 +7,7 @@ body { margin: 0; }
 
 .slide-row { cursor: pointer; }
 .slide-row:hover { background: var(--gray-a2); }
-.slide-row[data-selected] { background: var(--accent-a3); }
+.slide-row[data-cursor] { background: var(--accent-a3); }
 
 .slide-thumb {
   display: block;
