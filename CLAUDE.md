@@ -33,7 +33,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## 검증
 
 - `npm run typecheck && npm test` 는 변경마다 실행. 테스트는 `src/test/setup.ts`가 MSW node 서버를 연결하고 지연·에러를 끈 상태다.
-- 화면 확인: `npx vite --port 5199 --open false`로 띄운 뒤 `npx -y playwright@1.55.0 screenshot --channel chrome --wait-for-timeout=3500 <url> <file>`. Chrome `--headless --virtual-time-budget`은 MSW 서비스 워커가 안 떠서 빈 화면이 찍힌다. 확인 후 서버 종료.
+- 화면 확인: `npx vite --port 5199 --no-open`로 띄운 뒤 `npx -y playwright@1.55.0 screenshot --channel chrome --wait-for-timeout=3500 <url> <file>`. Chrome `--headless --virtual-time-budget`은 MSW 서비스 워커가 안 떠서 빈 화면이 찍힌다. 확인 후 서버 종료.
 
 ## 기록 (작업 후 필수)
 
