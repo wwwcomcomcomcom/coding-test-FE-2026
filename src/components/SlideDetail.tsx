@@ -1,7 +1,8 @@
-import { Button, Callout, DataList, Grid, Skeleton } from '@radix-ui/themes';
+import { Button, Callout, DataList, Flex, Grid, Skeleton } from '@radix-ui/themes';
 import { ApiRequestError } from '../api/client';
 import { useSlide } from '../hooks/useSlide';
 import { formatCellCounts, formatKi67, formatKST, maskName } from '../utils/format';
+import { SlideViewer } from './SlideViewer';
 import { StatusBadge } from './StatusBadge';
 
 /**
@@ -37,9 +38,13 @@ export function SlideDetail({ id }: { id: string }) {
     return (
       <Grid {...LAYOUT}>
         {/* 프레임(3:2)은 그대로 두고 스켈레톤이 안을 채운다. Skeleton 자체엔 크기가 없어서 프레임 역할을 못 함 */}
-        <div className="slide-image">
-          <Skeleton width="100%" height="100%" />
-        </div>
+        <Flex direction="column" gap="3">
+          <div className="slide-image">
+            <Skeleton width="100%" height="100%" />
+          </div>
+          {/* heatmap 컨트롤 줄 자리 */}
+          <Skeleton width="100%" height="24px" />
+        </Flex>
         <DataList.Root>
           {DETAIL_LABELS.map((label) => (
             <DataList.Item key={label}>
@@ -58,9 +63,7 @@ export function SlideDetail({ id }: { id: string }) {
 
   return (
     <Grid {...LAYOUT}>
-      <div className="slide-image">
-        <img src={data.imageUrl} alt={`${data.id} 슬라이드 이미지`} />
-      </div>
+      <SlideViewer imageUrl={data.imageUrl} heatmapUrl={data.heatmapUrl} alt={`${data.id} 슬라이드 이미지`} />
 
       <DataList.Root>
         <DataList.Item>
