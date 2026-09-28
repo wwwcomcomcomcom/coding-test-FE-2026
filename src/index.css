@@ -1,9 +1,34 @@
-:root {
-  font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
-  color: #1f2328;
-  background: #f6f7f9;
-  line-height: 1.5;
+.radix-themes {
+  --default-font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
 }
 * { box-sizing: border-box; }
 body { margin: 0; }
 .app { max-width: 1280px; margin: 0 auto; padding: 24px; }
+
+.slide-row { cursor: pointer; }
+.slide-row:hover { background: var(--gray-a2); }
+.slide-row[data-selected] { background: var(--accent-a3); }
+
+.slide-thumb {
+  display: block;
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: var(--radius-2);
+  background: var(--gray-a3);
+}
+
+/* 원본 이미지 비율(1200x800)로 자리를 먼저 잡아 로딩 중 레이아웃이 밀리지 않게 한다 */
+.slide-image {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  border-radius: var(--radius-3);
+  overflow: hidden;
+  background: var(--gray-a3);
+}
+.slide-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
