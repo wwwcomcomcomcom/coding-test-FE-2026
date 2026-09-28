@@ -43,4 +43,12 @@ body { margin: 0; }
 /* 컨트롤 줄이 없을 때(로딩 중, heatmap 없는 슬라이드) 그 자리(gap + 줄 높이)를 패딩으로 비워
    heatmap 유무와 상관없이 모달 높이를 같게 한다. gap은 <Flex gap="3">과 같은 --space-3 */
 .heatmap-placeholder { padding-bottom: calc(var(--space-3) + 24px); }
-.heatmap-opacity { width: 36px; text-align: right; font-variant-numeric: tabular-nums; }
+/* "100%"(4글자)가 들어가는 고정 폭. 36px로는 모자라 "%"가 다음 줄로 넘어갔다.
+   폭이 고정이라 값이 바뀌어도 슬라이더 길이가 흔들리지 않고, nowrap·shrink 0으로 줄바꿈·찌그러짐을 막는다 */
+.heatmap-opacity {
+  width: 5ch;
+  flex-shrink: 0;
+  white-space: nowrap;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
