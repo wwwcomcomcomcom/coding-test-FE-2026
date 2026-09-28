@@ -8,7 +8,7 @@ import type { SlideListResponse } from '../api/types';
  */
 export type SlidesState =
   | { status: 'loading'; previous: SlideListResponse | null }
-  | { status: 'success'; data: SlideListResponse }
+  | { status: 'success'; data: SlideListResponse; params: { q: string; page: number } }
   | { status: 'error'; error: Error };
 
 /** 화면에 보여 줄 목록: 성공 결과, 로딩 중이면 직전 결과, 에러면 없음 */
@@ -30,7 +30,8 @@ export function useSlides(q: string, page: number) {
       .then((data) => {
         // 이미 다음 요청으로 넘어갔다면 늦게 도착한 응답은 버린다
         if (controller.signal.aborted) return;
-        setState({ status: 'success', data });
+        // 어떤 요청의 결과인지 함께 둔다. 요청 값이 막 바뀐 렌더에서는 아직 이전 요청의 결과가 들어 있다
+        setState({ status: 'success', data, params: { q, page } });
       })
       .catch((error: Error) => {
         if (controller.signal.aborted) return;
