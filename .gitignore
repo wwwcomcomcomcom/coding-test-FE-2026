@@ -3,3 +3,8 @@ dist
 *.log
 .DS_Store
 .vite
+
+# local notes
+history/
+.AI_LOG.md
+.playwright-mcp/
