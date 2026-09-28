@@ -42,7 +42,7 @@ and the time left. Each run also appends to `$QA_OUT/$AGENT_ID/runs.jsonl`.
 | `t.open(pathAndQuery)` | goto `QA_BASE_URL + path` and wait until React has rendered |
 | `t.check(name, ok, detail)` | record a PASS/FAIL. Never throws, so later checks keep running |
 | `t.shot(name, {fullPage})` | screenshot to `$QA_OUT/$AGENT_ID/<name>.png`. Open it with Read to look at it |
-| `t.fault({match, status, delayMs, times})` | the next matching `/api/` calls get delayed and/or answered with `status`. `match` is a substring (`'/api/slides/'` = detail, `'/api/slides?'` = list) or a RegExp. `times` defaults to 1, `Infinity` = every call. Survives reloads |
+| `t.fault({match, status, delayMs, times})` | the next matching `/api/` calls get delayed and/or answered with an error `status` (4xx/5xx only; the fake body is just `{message}`). **To slow down a successful call, pass only `delayMs`** and the real mock response arrives after the delay. `match` is a substring (`'/api/slides/'` = detail, `'/api/slides?'` = list) or a RegExp. `times` defaults to 1, `Infinity` = every call. Survives reloads |
 | `t.clearFaults()` | remove all pending faults |
 | `t.apiCalls` | live array `{t, url, aborted}` of the app's API calls. `aborted: true` means the request was cancelled before it reached the mock |
 | `t.api(path)` | raw GET through the mock, bypassing the hook and retrying 500s → `{status, body}`. Use it as the **oracle** for expected data |

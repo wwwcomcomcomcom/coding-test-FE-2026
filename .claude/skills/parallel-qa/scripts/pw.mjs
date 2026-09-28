@@ -153,6 +153,11 @@ export async function runTest(fn, { stable = true, viewport = { width: 1280, hei
       return file;
     },
     fault({ match, status, delayMs, times = 1 }) {
+      // The injected body is only { message }, so a 2xx would crash the app on missing fields (a fake bug).
+      // To only slow a call down, omit status: the real mock response follows the delay.
+      if (status !== undefined && !(status >= 400 && status <= 599)) {
+        throw new Error(`t.fault: status must be an error code (4xx/5xx), got ${status}. Omit status to only delay the real response.`);
+      }
       faults.push({ match, status, delayMs, times });
     },
     clearFaults() {
