@@ -38,12 +38,11 @@ export function SlideDetail({ id }: { id: string }) {
     return (
       <Grid {...LAYOUT}>
         {/* 프레임(3:2)은 그대로 두고 스켈레톤이 안을 채운다. Skeleton 자체엔 크기가 없어서 프레임 역할을 못 함 */}
-        <Flex direction="column" gap="3">
+        {/* heatmap 컨트롤 줄 자리는 회색 박스 대신 패딩으로 비워 둔다 */}
+        <Flex direction="column" gap="3" className="heatmap-placeholder">
           <div className="slide-image">
             <Skeleton width="100%" height="100%" />
           </div>
-          {/* heatmap 컨트롤 줄 자리 */}
-          <Skeleton width="100%" height="24px" />
         </Flex>
         <DataList.Root>
           {DETAIL_LABELS.map((label) => (
