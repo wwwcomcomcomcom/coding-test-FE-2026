@@ -2,6 +2,11 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## 언어
+
+- 생각과 작업(추론, 도구 호출 설명, 스크립트 등)은 영어로 한다.
+- 사용자에게 하는 보고와 답변은 한국어로 한다. 코드 주석과 `.AI_LOG.md`도 지금처럼 한국어로 쓴다.
+
 ## 프로젝트 문맥
 
 프론트엔드 신입 코딩테스트(150분): 병리 슬라이드 AI 분석 결과 뷰어. 요구사항·API 명세·화면 표시 규칙은 @PROBLEM.md 가 단일 기준이다.
