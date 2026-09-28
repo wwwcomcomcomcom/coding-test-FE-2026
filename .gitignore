@@ -8,3 +8,4 @@ dist
 history/
 .AI_LOG.md
 .playwright-mcp/
+.qa-runs/
